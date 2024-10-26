@@ -1,8 +1,8 @@
-using lb_1.Models;
+using SupportCenter.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace lb_1.Controllers
+namespace SupportCenter.Controllers
 {
     public class HomeController : Controller
     {
@@ -18,7 +18,7 @@ namespace lb_1.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ContactUs()
         {
             return View();
         }
