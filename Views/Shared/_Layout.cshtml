@@ -1,27 +1,45 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - lb_1</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lb_1.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <title>@ViewData["Title"] - Support site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <!-- theme meta -->
+    <meta name="theme-name" content="Suport home page" />
+
+    <link rel="stylesheet" href="~/plugins/bootstrap/bootstrap.min.css">
+    <!-- Themify Icons -->
+    <link rel="stylesheet" href="~/plugins/themify-icons/themify-icons.css">
+    <!--Favicon-->
+    <link rel="icon" href="~/images/favicon.png" type="image/x-icon">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link href="~/assets/style.css" rel="stylesheet" media="screen" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">lb_1</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+    <!-- header -->
+    <header class="banner overlay bg-cover" style="background-image: url('/images/banner.jpg')">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <div class="container">
+                <a class="navbar-brand px-2" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation"
+                    aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="collapse navbar-collapse text-center" id="navigation">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+@*                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Faq">Faq</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li> *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -29,21 +47,55 @@
                 </div>
             </div>
         </nav>
+        <!-- banner -->
+        <div class="container section">
+            <div class="row">
+                <div class="col-lg-8 text-center mx-auto">
+                    <h1 class="text-white mb-3">Support Center &amp; Knowledge base</h1>
+                    <p class="text-white mb-4">Find advice and answers from our support team fast or get in touch</p>
+                    <div class="position-relative">
+                        <input id="search" class="form-control" placeholder="Have a question? Just ask here or enter terms"><i
+                            class="ti-search search-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /banner -->
     </header>
+    <!-- /header -->
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- footer -->
+    <footer class="section pb-4">
         <div class="container">
-            &copy; 2024 - lb_1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row align-items-center">
+                <div class="col-md-8 text-md-left text-center">
+                    <p class="mb-md-0 mb-4">&copy; 2024 - lb_1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+                </div>
+                <div class="col-md-4 text-md-right text-center">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i class="ti-facebook"></i></a></li>
+                        <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i class="ti-twitter-alt"></i></a></li>
+                        <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i class="ti-github"></i></a></li>
+                        <li class="list-inline-item"><a class="text-color d-inline-block p-2" href="#"><i class="ti-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- /footer -->
+    <script src="~/lib/jquery/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/plugins/bootstrap/bootstrap.min.js"></script>
+    <!-- match-height JS -->
+    <script src="~/plugins/match-height/jquery.matchHeight-min.js"></script> 
+    <!-- Main Script -->
+    <script src="~/assets/script.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
