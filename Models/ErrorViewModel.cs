@@ -1,4 +1,4 @@
-namespace lb_1.Models
+namespace SupportCenter.Models
 {
     public class ErrorViewModel
     {
