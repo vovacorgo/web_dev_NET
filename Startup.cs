@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using System;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
+using System.Threading.Tasks;
 using SupportCenter.Services;
-
-
 
 namespace SupportCenter
 {
@@ -14,22 +17,34 @@ namespace SupportCenter
     {
         public Startup(IConfiguration configuration)
         {
-
             Configuration = configuration;
+
+            // Ensure Logs directory exists
+            string logDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Logs");
+            if (!Directory.Exists(logDirectory))
+            {
+                Directory.CreateDirectory(logDirectory);
+            }
+
+            // Configure Serilog to log to a file
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.Console() // Log to the console as well
+                .WriteTo.File(Path.Combine(logDirectory, "requests.log"), rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            Log.Information("Application starting up...");
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Register EmailSender service
             services.AddScoped<IEmailSender, EmailSender>();
-
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,8 +60,10 @@ namespace SupportCenter
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
+            // Register the request logging middleware
+            app.UseMiddleware<RequestLoggingMiddleware>();
 
+            app.UseRouting();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -55,6 +72,11 @@ namespace SupportCenter
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // Ensure logs are flushed on shutdown
+            var lifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+            lifetime.ApplicationStopped.Register(Log.CloseAndFlush);
         }
     }
+
 }

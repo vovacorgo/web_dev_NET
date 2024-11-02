@@ -18,7 +18,6 @@ namespace SupportCenter.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				// Send email using the EmailSender service
 				_emailSender.SendEmailAsync(model.Email, model.Subject, model.Message).Wait();
 				return RedirectToAction("Index", "Home");
 			}
