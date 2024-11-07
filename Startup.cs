@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using System.Threading.Tasks;
 using SupportCenter.Services;
+using System.Net;
 
 namespace SupportCenter
 {
@@ -71,7 +72,19 @@ namespace SupportCenter
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "fileUpload",
+                    pattern: "file/upload",
+                    defaults: new { controller = "File", action = "Upload" });
+
+
+                endpoints.MapControllerRoute(
+                    name: "fileIndex",
+                    pattern: "files",
+                    defaults: new { controller = "File", action = "ImagesView" });
             });
+ 
 
             // Ensure logs are flushed on shutdown
             var lifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();

@@ -1,0 +1,38 @@
+﻿@model string[]
+
+@{
+    ViewData["Title"] = "Uploaded Files";
+}
+
+<h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var fileName in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="thumbnail">
+                    <a href="~/Files/@fileName" data-lightbox="gallery" data-title="@fileName">
+                        <img src="~/Files/@fileName" alt="@fileName" class="img-fluid" />
+                    </a>
+                    <div class="caption text-center">
+                        <p>@fileName</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<style>
+    .thumbnail {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        text-align: center;
+    }
+    .thumbnail img {
+        border-radius: 4px;
+    }
+</style>
