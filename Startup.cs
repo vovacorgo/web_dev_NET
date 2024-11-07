@@ -73,17 +73,16 @@ namespace SupportCenter
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                // File upload route
                 endpoints.MapControllerRoute(
                     name: "fileUpload",
                     pattern: "file/upload",
                     defaults: new { controller = "File", action = "Upload" });
 
-                // Route to view uploaded files
+
                 endpoints.MapControllerRoute(
                     name: "fileIndex",
-                    pattern: "file",
-                    defaults: new { controller = "File", action = "Index" });
+                    pattern: "files",
+                    defaults: new { controller = "File", action = "ImagesView" });
             });
  
 
