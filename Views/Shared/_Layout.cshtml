@@ -1,12 +1,16 @@
-﻿<!DOCTYPE html>
+﻿     @using Microsoft.AspNetCore.Mvc.Localization
+     @inject IViewLocalizer Localizer
+
+
+<!DOCTYPE html>
 <html lang="en-us">
 <head>
     <meta charset="utf-8">
-    <title>@ViewData["Title"] - Support site</title>
+    <title>@ViewData["Title"] - @Localizer["Support site"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
+
     <!-- theme meta -->
-    <meta name="theme-name" content="Suport home page" />
+    <meta name="theme-name" content="@Localizer["Support home page"]" />
 
     <link rel="stylesheet" href="~/plugins/bootstrap/bootstrap.min.css">
     <!-- Themify Icons -->
@@ -23,25 +27,30 @@
     <header class="banner overlay bg-cover" style="background-image: url('/images/banner.jpg')">
         <nav class="navbar navbar-expand-md navbar-dark">
             <div class="container">
-                <a class="navbar-brand px-2" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="navbar-brand px-2" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+
+                <partial>
+                    @await Html.PartialAsync("_LanguageSwitcher")
+                </partial>
+
                 <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation"
-                    aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        aria-controls="navigation" aria-expanded="false" aria-label="@Localizer["Toggle navigation"]">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse text-center" id="navigation">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-route="fileIndex">Our Images</a>
+                            <a class="nav-link text-dark" asp-area="" asp-route="fileIndex">@Localizer["Our Images"]</a>
                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Upload">Send us your image</a>
-                         </li> 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Upload">@Localizer["Send us your image"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">@Localizer["Contact Us"]</a>
                         </li>
                     </ul>
                 </div>
@@ -51,11 +60,10 @@
         <div class="container section">
             <div class="row">
                 <div class="col-lg-8 text-center mx-auto">
-                    <h1 class="text-white mb-3">Support Center &amp; Knowledge base</h1>
-                    <p class="text-white mb-4">Find advice and answers from our support team fast or get in touch</p>
+                    <h1 class="text-white mb-3">@Localizer["Support Center & Knowledge base"]</h1>
+                    <p class="text-white mb-4">@Localizer["Find advice and answers from our support team fast or get in touch"]</p>
                     <div class="position-relative">
-                        <input id="search" class="form-control" placeholder="Have a question? Just ask here or enter terms"><i
-                            class="ti-search search-icon"></i>
+                        <input id="search" class="form-control" placeholder="@Localizer["Have a question? Just ask here or enter terms"]"><i class="ti-search search-icon"></i>
                     </div>
                 </div>
             </div>
@@ -75,7 +83,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8 text-md-left text-center">
-                    <p class="mb-md-0 mb-4">&copy; 2024 - SupportCenter - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+                    <p class="mb-md-0 mb-4">&copy; 2024 - SupportCenter - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a></p>
                 </div>
                 <div class="col-md-4 text-md-right text-center">
                     <ul class="list-inline">
@@ -93,7 +101,7 @@
     <!-- Bootstrap JS -->
     <script src="~/plugins/bootstrap/bootstrap.min.js"></script>
     <!-- match-height JS -->
-    <script src="~/plugins/match-height/jquery.matchHeight-min.js"></script> 
+    <script src="~/plugins/match-height/jquery.matchHeight-min.js"></script>
     <!-- Main Script -->
     <script src="~/assets/script.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

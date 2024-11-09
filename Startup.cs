@@ -11,6 +11,11 @@ using Microsoft.AspNetCore.Http.Extensions;
 using System.Threading.Tasks;
 using SupportCenter.Services;
 using System.Net;
+using Microsoft.Extensions.Localization;
+using SupportCenter.Controllers;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 namespace SupportCenter
 {
@@ -43,7 +48,11 @@ namespace SupportCenter
         {
             // Register EmailSender service
             services.AddScoped<IEmailSender, EmailSender>();
-            services.AddControllersWithViews();
+
+
+            services.AddControllersWithViews()
+                .AddDataAnnotationsLocalization()
+                .AddViewLocalization();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -58,11 +67,27 @@ namespace SupportCenter
                 app.UseHsts();
             }
 
+
+            //translations
+            var supportedCultures = new[] { "en", "uk-UA" }; // Add other supported cultures here
+            var localizationOptions = new RequestLocalizationOptions()
+                .SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+            localizationOptions.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
+            app.UseRequestLocalization(localizationOptions);
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+
+
+
             // Register the request logging middleware
             app.UseMiddleware<RequestLoggingMiddleware>();
+
+
 
             app.UseRouting();
             app.UseAuthorization();
@@ -86,7 +111,7 @@ namespace SupportCenter
             });
  
 
-            // Ensure logs are flushed on shutdown
+            // log temp flush on close
             var lifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
             lifetime.ApplicationStopped.Register(Log.CloseAndFlush);
         }

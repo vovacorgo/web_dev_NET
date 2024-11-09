@@ -1,0 +1,14 @@
+﻿
+@* Views/Shared/_LanguageSwitcher.cshtml *@
+@{
+    var currentCulture = System.Globalization.CultureInfo.CurrentCulture.Name;
+}
+
+<form asp-controller="Home" asp-action="SetLanguage" method="post">
+    <div class="form-group mt-3 ml-3 " >
+        <select name="language_code" class="form-control" onchange="this.form.submit()">
+        <option value="en" selected="@(currentCulture == "en")">English</option>
+        <option value="uk-UA" selected="@(currentCulture == "uk-UA")">Українська</option>
+    </select>
+    </div>
+</form>
