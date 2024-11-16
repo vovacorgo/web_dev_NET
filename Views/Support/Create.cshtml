@@ -1,0 +1,70 @@
+﻿@model SupportCenter.Models.SupportRequest
+
+@{
+    ViewBag.Title = "Create Support Request";
+}
+
+<h2>Create Support Request</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage as string))
+{
+    <div class="alert alert-success">
+        @ViewBag.SuccessMessage
+    </div>
+}
+@using (Html.BeginForm("Create", "Support", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <p style="text-align:center">Share your feedback/question to us</p>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @for = "email" })
+        @Html.TextBoxFor(m => m.Email, new { @id = "email", @name = "Email", @required = "required", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Subject, new { @for = "subject" })
+        @Html.TextBoxFor(m => m.Subject, new { @id = "subject", @name = "Subject", @required = "required", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Message, new { @for = "message" })
+        @Html.TextAreaFor(m => m.Message, new { @id = "message", @name = "Message", @required = "required", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone, new { @for = "phone" })
+        @Html.TextBoxFor(m => m.Phone, new { @id = "phone", @name = "Phone", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RequestDate, new { @for = "requestDate" })
+        @Html.TextBoxFor(m => m.RequestDate, new { @id = "requestDate", @name = "RequestDate", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.RequestDate, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Priority, new { @for = "priority" })
+        @Html.TextBoxFor(m => m.Priority, new { @id = "priority", @name = "Priority", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Priority, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status, new { @for = "status" })
+        @Html.TextBoxFor(m => m.Status, new { @id = "status", @name = "Status", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AssignedTo, new { @for = "assignedTo" })
+        @Html.TextBoxFor(m => m.AssignedTo, new { @id = "assignedTo", @name = "AssignedTo", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AssignedTo, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Resolution, new { @for = "resolution" })
+        @Html.TextBoxFor(m => m.Resolution, new { @id = "resolution", @name = "Resolution", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Resolution, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category, new { @for = "category" })
+        @Html.TextBoxFor(m => m.Category, new { @id = "category", @name = "Category", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}

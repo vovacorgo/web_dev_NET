@@ -25,37 +25,10 @@
 <body>
     <!-- header -->
     <header class="banner overlay bg-cover" style="background-image: url('/images/banner.jpg')">
-        <nav class="navbar navbar-expand-md navbar-dark">
-            <div class="container">
-                <a class="navbar-brand px-2" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
 
-                <partial>
-                    @await Html.PartialAsync("_LanguageSwitcher")
-                </partial>
+        <!-- navigation -->
+        @await Component.InvokeAsync("Navbar")
 
-                <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation"
-                        aria-controls="navigation" aria-expanded="false" aria-label="@Localizer["Toggle navigation"]">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse text-center" id="navigation">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-route="fileIndex">@Localizer["Our Images"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Upload">@Localizer["Send us your image"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">@Localizer["Contact Us"]</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
         <!-- banner -->
         <div class="container section">
             <div class="row">
@@ -72,8 +45,15 @@
     </header>
     <!-- /header -->
 
+
     <div class="container">
         <main role="main" class="pb-3">
+            @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage as string))
+            {
+                <div class="alert alert-success">
+                    @ViewBag.SuccessMessage
+                </div>
+            }
             @RenderBody()
         </main>
     </div>

@@ -24,7 +24,6 @@ namespace SupportCenter.Controllers
 
         // POST: /file/upload
         [HttpPost]
-        [HttpPost]
         public async Task<IActionResult> Upload(FileUploadModel model)
         {
             if (model.File != null && model.File.Length > 0) // Check for valid file

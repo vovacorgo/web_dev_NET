@@ -21,7 +21,6 @@ namespace SupportCenter.Controllers
         public IActionResult Index()
         {
 
-            ViewBag.Flash = _localizer["Hello"];
             return View();
         }
 
@@ -44,7 +43,7 @@ namespace SupportCenter.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMinutes(30) }
             );
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,0 +1,38 @@
+﻿@{
+    @using Microsoft.AspNetCore.Mvc.Localization
+    @inject IViewLocalizer Localizer
+}
+<nav class="navbar navbar-expand-md navbar-dark">
+    <div class="container">
+        <a class="navbar-brand px-2" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+
+        <partial>
+            @await Html.PartialAsync("_LanguageSwitcher")
+        </partial>
+
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation" aria-expanded="false" aria-label="@Localizer["Toggle navigation"]">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse text-center" id="navigation">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-route="fileIndex">@Localizer["Our Images"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Upload">@Localizer["Send us your image"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">@Localizer["Contact Us"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Create">@Localizer["Send us request"]</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
